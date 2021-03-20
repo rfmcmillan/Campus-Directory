@@ -1,20 +1,20 @@
 const express = require('express');
-//initialize app
 const app = express();
-//require morgan|volleyball, path packages
+
 const morgan = require('morgan');
 const path = require('path');
-//require db from /db
+
 const {
   db,
   syncAndSeed,
   models: { Campus },
 } = require('./db');
 
-//use morgan|volleyball
 app.use(morgan('dev'));
-//use express.json()
+
 app.use(express.json());
+
+const router = require('./routes');
 
 //use express.static() MAKE SURE THE PATH TO YOUR PUBLIC FOLDER IS RIGHT!
 app.use('/public', express.static(path.join(__dirname, 'public')));

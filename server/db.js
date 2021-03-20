@@ -6,9 +6,9 @@ const db = new Sequelize(
 );
 
 const { DataTypes } = Sequelize;
-
+console.log(db);
 //define your model
-const Campus = db.define({
+const Campus = db.define('campus', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -22,12 +22,11 @@ const Campus = db.define({
 //state your model associations (hasOne etc)
 
 //create syncAndSeed
-const syncAndSeed = () => {
+const syncAndSeed = async () => {
   await db.sync({ force: true });
   await Campus.create({
     name: 'University of Michigan',
-  })
-
+  });
 };
 
 //export your model

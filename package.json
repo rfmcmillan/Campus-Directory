@@ -8,7 +8,7 @@
 		"build": "webpack",
 		"build:dev": "webpack -w",
 		"start": "node server/index.js",
-		"start:dev": "npm run build:dev && nodemon server --ignore client --ignore server/public"
+		"start:dev": "nodemon server"
 	},
 	"author": "",
 	"license": "ISC",
@@ -18,7 +18,7 @@
 		"pg": "^8.3.3",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"sequelize": "^6.3.4"
+		"sequelize": "^6.5.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
