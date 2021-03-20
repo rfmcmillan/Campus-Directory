@@ -4,11 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 
-const {
-  db,
-  syncAndSeed,
-  models: { Campus },
-} = require('./db');
+const { db, syncAndSeed } = require('./db');
 
 app.use(morgan('dev'));
 
