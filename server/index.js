@@ -7,7 +7,7 @@ const path = require('path');
 const { db, syncAndSeed } = require('./db');
 
 app.use(morgan('dev'));
-
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use(express.json());
 
 const router = require('./routes');
@@ -16,6 +16,11 @@ const router = require('./routes');
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 //require in your routes and use them on your api path
+
+app.get('/', (req, res, next) =>
+  res.sendFile(path.join(__dirname, '../index.html'))
+);
+
 app.use('/api', router);
 //404 handler
 app.use((err, req, res, next) => {

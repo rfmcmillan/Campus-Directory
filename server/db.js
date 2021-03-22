@@ -1,12 +1,15 @@
+const faker = require('faker');
 const Sequelize = require('sequelize'); //for things like Sequelize.STRING
 
 //initialize your db, don't forget to include the possible heroku database URL
 const db = new Sequelize(
-  process.env.DATABASE_URL || 'postgres://localhost/campuses_db'
+  process.env.DATABASE_URL || 'postgres://localhost/campuses_db',
+  {
+    logging: false,
+  }
 );
 
 const { DataTypes } = Sequelize;
-console.log(db);
 //define your model
 const Campus = db.define('campus', {
   name: {
@@ -19,21 +22,42 @@ const Campus = db.define('campus', {
   imageUrl: {
     type: DataTypes.STRING,
     defaultValue: 'https://loremflickr.com/640/360',
-    validate: {
-      isUrl: true,
-    },
   },
-  address: {
+  streetAddress: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
+    defaultValue: faker.address.streetAddress,
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+    defaultValue: faker.address.city,
+  },
+  state: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+    defaultValue: faker.address.stateAbbr,
+  },
+  zip: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+    defaultValue: faker.address.zipCode,
   },
   description: {
     type: DataTypes.TEXT,
-    defaultValue:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    defaultValue: faker.lorem.paragraph,
   },
 });
 
@@ -44,6 +68,7 @@ const Student = db.define('student', {
     validate: {
       notEmpty: true,
     },
+    defaultValue: faker.name.firstName,
   },
   lastName: {
     type: DataTypes.STRING,
@@ -51,6 +76,7 @@ const Student = db.define('student', {
     validate: {
       notEmpty: true,
     },
+    defaultValue: faker.name.lastName,
   },
   email: {
     type: DataTypes.STRING,
@@ -59,10 +85,11 @@ const Student = db.define('student', {
       notEmpty: true,
       isEmail: true,
     },
+    defaultValue: faker.internet.email,
   },
   imageUrl: {
     type: DataTypes.STRING,
-    defaultValue: 'https://picsum.photos/200/300',
+    defaultValue: 'http://placeimg.com/640/480/people',
   },
   gpa: {
     type: DataTypes.FLOAT,
@@ -84,34 +111,22 @@ const syncAndSeed = async () => {
   await db.sync({ force: true });
   await Promise.all([
     Campus.create({
-      name: 'University of Michigan',
-      address: '12 Central St., Ann Arbor, MI 48220',
+      name: 'Weigand University',
+      imageUrl: 'public/images/duke.jpg',
     }),
     Campus.create({
-      name: 'University of Wisconsin',
-      address: '43 Isthmus Way, Madison, WI 45789',
+      name: 'Braun University',
+      imageUrl: 'public/images/unc.jpg',
     }),
     Campus.create({
-      name: 'University of North Carolina',
-      address: '98 Tar Heel Ave., Chapel Hill, NC 87954',
+      name: 'Bergstrom University',
+      imageUrl: 'public/images/ncstate.png',
     }),
   ]);
   await Promise.all([
-    Student.create({
-      firstName: 'Peter',
-      lastName: 'Parker',
-      email: 'pparker@gmail.com',
-    }),
-    Student.create({
-      firstName: 'Bruce',
-      lastName: 'Wayne',
-      email: 'bwayne@wayneenterprises.com',
-    }),
-    Student.create({
-      firstName: 'James',
-      lastName: 'Howlett',
-      email: 'jhowlett@gmail.com',
-    }),
+    Student.create({ imageUrl: 'public/images/jack.jpeg' }),
+    Student.create({ imageUrl: 'public/images/jane.jpeg' }),
+    Student.create({ imageUrl: 'public/images/jen.jpeg' }),
   ]);
 };
 

@@ -1,26 +1,14 @@
 module.exports = {
-	entry: ["./client/index.js"],
-	output: {
-		path: __dirname,
-		filename: "./server/public/bundle.js",
-	},
-	resolve: {
-		extensions: [".js", ".jsx"],
-	},
-	devtool: "source-map",
-	watchOptions: {
-		ignored: /node_modules/,
-	},
-	module: {
-		rules: [
-			{
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				loader: "babel-loader",
-				options: {
-					presets: ["@babel/preset-react"],
-				},
-			},
-		],
-	},
-}
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-react'],
+        },
+      },
+    ],
+  },
+};
