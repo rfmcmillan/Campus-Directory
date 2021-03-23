@@ -2,7 +2,10 @@ import React from 'react';
 import { connect, Provider } from 'react-redux';
 import Campuses from './Campuses';
 import Students from './Students';
+import Nav from './Nav';
+import Home from './Home';
 import { loadCampuses, loadStudents } from '../store';
+import { Switch, HashRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 //import any sub-components
 
@@ -18,10 +21,13 @@ class App extends React.Component {
   //render
   render() {
     return (
-      <div>
-        <Campuses />
-        <Students />
-      </div>
+      <HashRouter>
+        <div>
+          <Route component={Nav} />
+          <Route component={Campuses} path="/campuses" />
+          <Route component={Students} path="/students" />
+        </div>
+      </HashRouter>
     );
   }
 }
