@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Campus = ({ campus, campusStudents }) => {
   if (!campus.id) {
@@ -9,7 +10,7 @@ const Campus = ({ campus, campusStudents }) => {
   return (
     <div>
       <h3>{campus.name}</h3>
-      <img src={campus.imageUrl} />
+      <img src={campus.imageUrl} width="500" />
       <h5>Address:</h5>
       <p>
         {campus.streetAddress}
@@ -24,7 +25,7 @@ const Campus = ({ campus, campusStudents }) => {
           campusStudents.map((student, index) => {
             return (
               <li key={index}>
-                <Link>
+                <Link to={`/students/${student.id}`}>
                   {student.firstName} {student.lastName}
                 </Link>
               </li>

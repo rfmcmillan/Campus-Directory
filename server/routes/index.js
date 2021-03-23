@@ -13,16 +13,18 @@ router.get('/campuses', async (req, res, next) => {
   }
 });
 
-router.get('/campuses/:id/students', async (req, res, next) => {
+router.get('/campuses/:id', async (req, res, next) => {
   try {
-    const campusId = req.params.id;
-    const students = await Student.findAll({
+    console.log(req.params.id);
+    const campus = await Campus.findAll({
       where: {
-        campusId: campusId,
+        id: req.params.id,
+      },
+      include: {
+        model: Student,
       },
     });
-    console.log(students);
-    res.send(students);
+    res.send(campus);
   } catch (error) {
     next(error);
   }
@@ -32,6 +34,22 @@ router.get('/students', async (req, res, next) => {
   try {
     const students = await Student.findAll();
     res.send(students);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/students/:id', async (req, res, next) => {
+  try {
+    const student = await Student.findAll({
+      where: {
+        id: req.params.id,
+      },
+      include: {
+        model: Campus,
+      },
+    });
+    res.send(student);
   } catch (error) {
     next(error);
   }

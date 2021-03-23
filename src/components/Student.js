@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Student = ({ student, studentCampus }) => {
   if (!student.id) {
@@ -15,7 +16,10 @@ const Student = ({ student, studentCampus }) => {
       <ul>
         <li>Email: {student.email}</li>
         <li>GPA: {student.gpa}</li>
-        <li>Campus: {studentCampus.name}</li>
+        <li>
+          Campus:{' '}
+          <Link to={`/campuses/${studentCampus.id}`}>{studentCampus.name}</Link>
+        </li>
       </ul>
     </div>
   );
