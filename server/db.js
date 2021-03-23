@@ -123,11 +123,26 @@ const syncAndSeed = async () => {
       imageUrl: 'public/images/ncstate.png',
     }),
   ]);
-  await Promise.all([
-    Student.create({ imageUrl: 'public/images/jack.jpeg' }),
-    Student.create({ imageUrl: 'public/images/jane.jpeg' }),
-    Student.create({ imageUrl: 'public/images/jen.jpeg' }),
-  ]);
+
+  const jack = await Student.create({
+    firstName: 'Jack',
+    imageUrl: 'public/images/jack.jpeg',
+  });
+  const jane = await Student.create({
+    firstName: 'Jane',
+    imageUrl: 'public/images/jane.jpeg',
+  });
+  const jen = await Student.create({
+    firstName: 'Jen',
+    imageUrl: 'public/images/jen.jpeg',
+  });
+
+  jack.campusId = 1;
+  jack.save();
+  jane.campusId = 2;
+  jane.save();
+  jen.campusId = 3;
+  jen.save();
 };
 
 //export your model

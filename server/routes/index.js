@@ -13,6 +13,21 @@ router.get('/campuses', async (req, res, next) => {
   }
 });
 
+router.get('/campuses/:id/students', async (req, res, next) => {
+  try {
+    const campusId = req.params.id;
+    const students = await Student.findAll({
+      where: {
+        campusId: campusId,
+      },
+    });
+    console.log(students);
+    res.send(students);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/students', async (req, res, next) => {
   try {
     const students = await Student.findAll();

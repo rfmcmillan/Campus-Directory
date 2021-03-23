@@ -1,19 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Campuses = (props) => {
-  console.log('props:', props);
   const { campuses } = props;
-  console.log(campuses);
+
   return (
     <div>
       <h3>Campuses</h3>
       <ul>
-        {campuses.map((campus) => {
+        {campuses.map((campus, index) => {
           return (
-            <li>
-              {campus.name}
+            <li key={index}>
+              <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
               <br />
               <img src={campus.imageUrl} width="150" />
             </li>
