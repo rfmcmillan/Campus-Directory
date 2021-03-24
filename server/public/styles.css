@@ -1,0 +1,12 @@
+body {
+  font-family: Georgia;
+}
+#nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}

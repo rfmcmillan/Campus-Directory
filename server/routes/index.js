@@ -30,6 +30,16 @@ router.get('/campuses/:id', async (req, res, next) => {
   }
 });
 
+router.post('/campuses', async (req, res, next) => {
+  try {
+    console.log('inside router.post to /api/campuses');
+    const campus = req.body;
+    res.status(201).send(await Campus.create(campus));
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/students', async (req, res, next) => {
   try {
     const students = await Student.findAll();
@@ -50,6 +60,16 @@ router.get('/students/:id', async (req, res, next) => {
       },
     });
     res.send(student);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/students', async (req, res, next) => {
+  try {
+    const student = req.body;
+    const newStudent = await Student.create(student);
+    res.status(201).send(newStudent);
   } catch (error) {
     next(error);
   }

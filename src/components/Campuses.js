@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import CreateCampus from './CreateCampus';
 
 const Campuses = (props) => {
   const { campuses } = props;

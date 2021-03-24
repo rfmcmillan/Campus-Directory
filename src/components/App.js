@@ -2,8 +2,10 @@ import React from 'react';
 import { connect, Provider } from 'react-redux';
 import Campuses from './Campuses';
 import Campus from './Campus';
+import CreateCampus from './CreateCampus';
 import Students from './Students';
 import Student from './Student';
+import CreateStudent from './CreateStudent';
 import Nav from './Nav';
 import Home from './Home';
 
@@ -28,10 +30,12 @@ class App extends React.Component {
       <HashRouter>
         <div>
           <Route component={Nav} />
+          <Route component={CreateCampus} path="/campuses" exact />
           <Route component={Campuses} path="/campuses" exact />
           {/* <Switch> */}
           <Route component={Campus} path="/campuses/:id" exact />
           {/* </Switch> */}
+          <Route component={CreateStudent} path="/students" exact />
           <Route component={Students} path="/students" exact />
           <Route component={Student} path="/students/:id" exact />
         </div>
