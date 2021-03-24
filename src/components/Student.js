@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Student = ({ student, studentCampus }) => {
+  console.log(studentCampus);
   if (!student.id) {
     return '...loading user';
   }
@@ -18,7 +19,13 @@ const Student = ({ student, studentCampus }) => {
         <li>GPA: {student.gpa}</li>
         <li>
           Campus:{' '}
-          <Link to={`/campuses/${studentCampus.id}`}>{studentCampus.name}</Link>
+          {!!studentCampus.id ? (
+            <Link to={`/campuses/${studentCampus.id}`}>
+              {studentCampus.name}
+            </Link>
+          ) : (
+            'The current student has not yet registered for a campus.'
+          )}
         </li>
       </ul>
     </div>

@@ -6,7 +6,9 @@ class CreateStudent extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: '',
+      email: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -23,9 +25,8 @@ class CreateStudent extends Component {
     ev.preventDefault();
     try {
       console.log('inside try');
-      console.log(this.state.name);
-      const { name } = this.state;
-      await this.props.create(name);
+      const { firstName, lastName, email } = this.state;
+      await this.props.create(firstName, lastName, email);
       console.log('create called');
     } catch (error) {
       console.log(`error: onSave func isn't going through`);
@@ -34,17 +35,22 @@ class CreateStudent extends Component {
   }
 
   render() {
-    const { name } = this.state;
+    const { firstName, lastName, email } = this.state;
     const { onChange, onSave } = this;
     return (
       <div>
         <h5>Add Another Student:</h5>
         <form onSubmit={onSave}>
           {/* <pre>{!!error && JSON.stringify(error, null)}</pre> */}
-          <label>Name:</label>
-          <input name="name" value={name} onChange={onChange} />
+          <label>First Name:</label>
+          <input name="firstName" value={firstName} onChange={onChange} />
           <br />
-
+          <label>Last Name:</label>
+          <input name="lastName" value={lastName} onChange={onChange} />
+          <br />
+          <label>Email Address:</label>
+          <input name="email" value={email} onChange={onChange} />
+          <br />
           <button>Save</button>
         </form>
       </div>
@@ -55,7 +61,8 @@ class CreateStudent extends Component {
 const mapDispatchToProps = (dispatch, otherProps) => {
   console.log('mapping dispatch to props', otherProps);
   return {
-    create: (name) => dispatch(createStudent(name, history)),
+    create: (firstName, lastName, email) =>
+      dispatch(createStudent(firstName, lastName, email, history)),
   };
 };
 

@@ -74,9 +74,11 @@ const _createStudent = (student) => {
   };
 };
 
-const createStudent = (name) => {
+const createStudent = (firstName, lastName, email, history) => {
   return async (dispatch) => {
-    const student = (await axios.post('/api/students', { name })).data;
+    const student = (
+      await axios.post('/api/students', { firstName, lastName, email })
+    ).data;
     dispatch(_createStudent(student));
     history.push(`students/${student.id}`);
   };

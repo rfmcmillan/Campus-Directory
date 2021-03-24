@@ -69,6 +69,8 @@ router.post('/students', async (req, res, next) => {
   try {
     const student = req.body;
     const newStudent = await Student.create(student);
+    newStudent.campusId = 1;
+    newStudent.save();
     res.status(201).send(newStudent);
   } catch (error) {
     next(error);
