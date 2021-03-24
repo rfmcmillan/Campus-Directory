@@ -21,7 +21,8 @@ const Campus = db.define('campus', {
   },
   imageUrl: {
     type: DataTypes.STRING,
-    defaultValue: 'https://loremflickr.com/640/360',
+    //defaultValue: 'https://loremflickr.com/640/360',
+    defaultValue: '/public/images/duke.jpg',
   },
   streetAddress: {
     type: DataTypes.STRING,
@@ -89,7 +90,8 @@ const Student = db.define('student', {
   },
   imageUrl: {
     type: DataTypes.STRING,
-    defaultValue: 'http://placeimg.com/640/480/people',
+    //defaultValue: 'http://placeimg.com/640/480/people',
+    defaultValue: 'public/images/jen.jpeg',
   },
   gpa: {
     type: DataTypes.FLOAT,

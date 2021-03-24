@@ -10,3 +10,6 @@ form {
   display: flex;
   flex-direction: column;
 }
+.delete {
+  margin-left: 0.5rem;
+}

@@ -40,6 +40,14 @@ router.post('/campuses', async (req, res, next) => {
   }
 });
 
+router.delete('/campuses/:id', async (req, res, next) => {
+  try {
+    const campus = await Campus.findByPk(req.params.id);
+    campus.destroy();
+    res.sendStatus(204);
+  } catch (error) {}
+});
+
 router.get('/students', async (req, res, next) => {
   try {
     const students = await Student.findAll();

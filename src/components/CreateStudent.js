@@ -15,7 +15,6 @@ class CreateStudent extends Component {
   }
 
   onChange(ev) {
-    console.log(ev);
     const change = {};
     change[ev.target.name] = ev.target.value;
     this.setState(change);
@@ -24,12 +23,9 @@ class CreateStudent extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      console.log('inside try');
       const { firstName, lastName, email } = this.state;
       await this.props.create(firstName, lastName, email);
-      console.log('create called');
     } catch (error) {
-      console.log(`error: onSave func isn't going through`);
       // this.setState({ error: error.response.data.error });
     }
   }
@@ -58,8 +54,7 @@ class CreateStudent extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, otherProps) => {
-  console.log('mapping dispatch to props', otherProps);
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     create: (firstName, lastName, email) =>
       dispatch(createStudent(firstName, lastName, email, history)),

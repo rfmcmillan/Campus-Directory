@@ -17,7 +17,6 @@ class CreateCampus extends Component {
   }
 
   onChange(ev) {
-    console.log(ev);
     const change = {};
     change[ev.target.name] = ev.target.value;
     this.setState(change);
@@ -26,13 +25,9 @@ class CreateCampus extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      console.log('inside try');
-      console.log(this.state.name);
       const { name, streetAddress, city, state, zip } = this.state;
       await this.props.create(name, streetAddress, city, state, zip);
-      console.log('create called');
     } catch (error) {
-      console.log(`error: onSave func isn't going through`);
       this.setState({ error: error.response.data.error });
     }
   }
@@ -71,8 +66,7 @@ class CreateCampus extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, otherProps) => {
-  console.log('mapping dispatch to props', otherProps);
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     create: (name, streetAddress, city, state, zip) =>
       dispatch(createCampus(name, streetAddress, city, state, zip, history)),

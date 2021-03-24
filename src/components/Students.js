@@ -16,6 +16,7 @@ const Students = (props) => {
               <Link to={`/students/${student.id}`}>
                 {student.firstName} {student.lastName}
               </Link>
+              <button className="delete">X</button>
               <br />
               <img src={student.imageUrl} height="100" />
             </li>

@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 
 const LOAD_CAMPUSES = 'LOAD_CAMPUSES';
 const CREATE_CAMPUS = 'CREATE_CAMPUS';
+const DESTROY_CAMPUS = 'DESTROY_CAMPUS';
 
 const LOAD_STUDENTS = 'LOAD_STUDENTS';
 const CREATE_STUDENT = 'CREATE_STUDENT';
@@ -47,9 +48,23 @@ const createCampus = (name, streetAddress, city, state, zip, history) => {
         zip,
       })
     ).data;
-
     dispatch(_createCampus(campus));
-    history.push(`/campuses/${campus.id}`);
+    //history.push(`/campuses`);
+  };
+};
+
+const _destroyCampus = (campus) => {
+  return {
+    type: DESTROY_CAMPUS,
+    campus,
+  };
+};
+
+const destroyCampus = (campus, history) => {
+  return async (dispatch) => {
+    await axios.delete(`api/campuses/${campus.id}`);
+    dispatch(_destroyCampus(campus));
+    //history.push('/campuses');
   };
 };
 
@@ -80,7 +95,6 @@ const createStudent = (firstName, lastName, email, history) => {
       await axios.post('/api/students', { firstName, lastName, email })
     ).data;
     dispatch(_createStudent(student));
-    history.push(`students/${student.id}`);
   };
 };
 
@@ -91,6 +105,9 @@ const campusesReducer = (state = [], action) => {
   }
   if (action.type === CREATE_CAMPUS) {
     state = [...state, action.campus];
+  }
+  if (action.type === DESTROY_CAMPUS) {
+    state = state.filter((campus) => campus.id !== action.campus.id);
   }
   return state;
 };
@@ -113,4 +130,10 @@ const reducer = combineReducers({
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 export default store;
-export { loadCampuses, loadStudents, createCampus, createStudent };
+export {
+  loadCampuses,
+  loadStudents,
+  createCampus,
+  createStudent,
+  destroyCampus,
+};
