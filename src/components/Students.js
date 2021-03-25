@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { destroyStudent } from '../store';
 
 const Students = (props) => {
-  const { students } = props;
+  const { students, destroy } = props;
 
   return (
     <div>
@@ -16,7 +16,9 @@ const Students = (props) => {
               <Link to={`/students/${student.id}`}>
                 {student.firstName} {student.lastName}
               </Link>
-              <button className="delete">X</button>
+              <button onClick={() => destroy(student)} className="delete">
+                X
+              </button>
               <br />
               <img src={student.imageUrl} height="100" />
             </li>
@@ -31,4 +33,10 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps)(Students);
+const mapDispatchToProps = (dispatch, { history }) => {
+  return {
+    destroy: (student) => dispatch(destroyStudent(student, history)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students);

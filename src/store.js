@@ -14,6 +14,7 @@ const DESTROY_CAMPUS = 'DESTROY_CAMPUS';
 
 const LOAD_STUDENTS = 'LOAD_STUDENTS';
 const CREATE_STUDENT = 'CREATE_STUDENT';
+const DESTROY_STUDENT = 'DESTROY_STUDENT';
 
 //Action creators & their thunks
 const _loadCampuses = (campuses) => {
@@ -98,6 +99,21 @@ const createStudent = (firstName, lastName, email, history) => {
   };
 };
 
+const _destroyStudent = (student) => {
+  return {
+    type: DESTROY_STUDENT,
+    student,
+  };
+};
+
+const destroyStudent = (student, history) => {
+  return async (dispatch) => {
+    await axios.delete(`api/students/${student.id}`);
+    dispatch(_destroyStudent(student));
+    //history.push('/campuses');
+  };
+};
+
 //Reducers
 const campusesReducer = (state = [], action) => {
   if (action.type === LOAD_CAMPUSES) {
@@ -119,6 +135,10 @@ const studentsReducer = (state = [], action) => {
   if (action.type === CREATE_STUDENT) {
     state = [...state, action.student];
   }
+  if (action.type === DESTROY_STUDENT) {
+    state = state.filter((student) => student.id !== action.student.id);
+    console.log(state);
+  }
   return state;
 };
 
@@ -136,4 +156,5 @@ export {
   createCampus,
   createStudent,
   destroyCampus,
+  destroyStudent,
 };

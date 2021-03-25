@@ -43,9 +43,11 @@ router.post('/campuses', async (req, res, next) => {
 router.delete('/campuses/:id', async (req, res, next) => {
   try {
     const campus = await Campus.findByPk(req.params.id);
-    campus.destroy();
+    await campus.destroy();
     res.sendStatus(204);
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/students', async (req, res, next) => {
@@ -80,6 +82,16 @@ router.post('/students', async (req, res, next) => {
     newStudent.campusId = 1;
     newStudent.save();
     res.status(201).send(newStudent);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/students/:id', async (req, res, next) => {
+  try {
+    const student = await Student.findByPk(req.params.id);
+    await student.destroy();
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }
