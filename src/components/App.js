@@ -3,9 +3,11 @@ import { connect, Provider } from 'react-redux';
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CreateCampus from './CreateCampus';
+import UpdateCampus from './UpdateCampus';
 import Students from './Students';
 import Student from './Student';
 import CreateStudent from './CreateStudent';
+import UpdateStudent from './UpdateStudent';
 import Nav from './Nav';
 import Home from './Home';
 
@@ -32,11 +34,11 @@ class App extends React.Component {
           <Route component={Nav} />
           <Route component={CreateCampus} path="/campuses" exact />
           <Route component={Campuses} path="/campuses" exact />
-          {/* <Switch> */}
+          <Route component={UpdateCampus} path="/campuses/:id" exact />
           <Route component={Campus} path="/campuses/:id" exact />
-          {/* </Switch> */}
           <Route component={CreateStudent} path="/students" exact />
           <Route component={Students} path="/students" exact />
+          <Route component={UpdateStudent} path="/students/:id" exact />
           <Route component={Student} path="/students/:id" exact />
         </div>
       </HashRouter>

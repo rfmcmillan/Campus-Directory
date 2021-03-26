@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { UNREGISTER_STUDENT } from '../store';
 
-const Campus = ({ campus, campusStudents }) => {
+const Campus = ({ campus, campusStudents, unregister }) => {
   if (!campus.id) {
     return '...loading user';
   }
@@ -28,6 +29,12 @@ const Campus = ({ campus, campusStudents }) => {
                 <Link to={`/students/${student.id}`}>
                   {student.firstName} {student.lastName}
                 </Link>
+                <button
+                  onClick={() => unregister(student)}
+                  className="unregister"
+                >
+                  Unregister
+                </button>
               </li>
             );
           })
@@ -52,4 +59,22 @@ const mapStateToProps = (state, otherProps) => {
   return { campus, campusStudents };
 };
 
-export default connect(mapStateToProps)(Campus);
+const mapDispatchToProps = (dispatch) => ({
+  unregister: async (student) => {
+    try {
+      console.log('student:', student);
+      const unregisteredStudent = (
+        await axios.put(`api/students/${student.id}`, { campusId: null })
+      ).data;
+      console.log('unregisteredStudent:', unregisteredStudent);
+      dispatch({
+        type: UNREGISTER_STUDENT,
+        unregisteredStudent,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Campus);

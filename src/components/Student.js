@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Student = ({ student, studentCampus }) => {
-  console.log(studentCampus);
+  console.log('studentCampus.id:', studentCampus.id);
   if (!student.id) {
     return '...loading user';
   }
@@ -39,9 +39,11 @@ const mapStateToProps = (state, otherProps) => {
     return student.id === (otherProps.match.params.id * 1 || {});
   });
 
-  const studentCampus = campuses.find((campus) => {
-    return student.campusId === campus.id;
-  });
+  const studentCampus = !!student.campusId
+    ? campuses.find((campus) => {
+        return student.campusId === campus.id;
+      })
+    : {};
 
   return { student, studentCampus };
 };
