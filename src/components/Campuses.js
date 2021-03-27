@@ -18,7 +18,7 @@ const Campuses = (props) => {
                 X
               </button>
               <br />
-              <img src={campus.imageUrl} width="150" />
+              <img id="campus-img" src={campus.imageUrl} width="150" />
             </li>
           );
         })}

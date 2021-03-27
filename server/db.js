@@ -23,7 +23,7 @@ const Campus = db.define('campus', {
   },
   imageUrl: {
     type: DataTypes.STRING,
-    defaultValue: '/public/images/duke.jpg',
+    defaultValue: '/public/images/campus-placeholder.jpg',
   },
   streetAddress: {
     type: DataTypes.STRING,

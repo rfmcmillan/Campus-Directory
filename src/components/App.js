@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import Alert from './Alert';
+
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CreateCampus from './CreateCampus';
@@ -10,7 +10,7 @@ import Student from './Student';
 import CreateStudent from './CreateStudent';
 import UpdateStudent from './UpdateStudent';
 import Nav from './Nav';
-import { loadCampuses, loadStudents } from '../store';
+import store, { loadCampuses, loadStudents } from '../store';
 import { HashRouter, Route } from 'react-router-dom';
 
 //import any sub-components
@@ -27,19 +27,21 @@ class App extends React.Component {
   //render
   render() {
     return (
-      <HashRouter>
-        <div>
-          <Route component={Nav} />
-          <Route component={CreateCampus} path="/campuses" exact />
-          <Route component={Campuses} path="/campuses" exact />
-          <Route component={UpdateCampus} path="/campuses/:id" exact />
-          <Route component={Campus} path="/campuses/:id" exact />
-          <Route component={CreateStudent} path="/students" exact />
-          <Route component={Students} path="/students" exact />
-          <Route component={UpdateStudent} path="/students/:id" exact />
-          <Route component={Student} path="/students/:id" exact />
-        </div>
-      </HashRouter>
+      <Provider store={store}>
+        <HashRouter>
+          <div>
+            <Route component={Nav} />
+            <Route component={CreateCampus} path="/campuses" exact />
+            <Route component={Campuses} path="/campuses" exact />
+            <Route component={UpdateCampus} path="/campuses/:id" exact />
+            <Route component={Campus} path="/campuses/:id" exact />
+            <Route component={CreateStudent} path="/students" exact />
+            <Route component={Students} path="/students" exact />
+            <Route component={UpdateStudent} path="/students/:id" exact />
+            <Route component={Student} path="/students/:id" exact />
+          </div>
+        </HashRouter>
+      </Provider>
     );
   }
 }
