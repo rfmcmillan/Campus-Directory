@@ -15,7 +15,6 @@ router.get('/campuses', async (req, res, next) => {
 
 router.get('/campuses/:id', async (req, res, next) => {
   try {
-    console.log(req.params.id);
     const campus = await Campus.findAll({
       where: {
         id: req.params.id,
@@ -32,7 +31,6 @@ router.get('/campuses/:id', async (req, res, next) => {
 
 router.post('/campuses', async (req, res, next) => {
   try {
-    console.log('inside router.post to /api/campuses');
     const campus = req.body;
     res.status(201).send(await Campus.create(campus));
   } catch (error) {
@@ -109,7 +107,6 @@ router.delete('/students/:id', async (req, res, next) => {
 
 router.put('/students/:id', async (req, res, next) => {
   try {
-    console.log('inside put call to students/:id');
     const student = await Student.findByPk(req.params.id);
     const newStudent = await student.update(req.body);
     res.send(newStudent);

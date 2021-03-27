@@ -169,6 +169,7 @@ const campusesReducer = (state = [], action) => {
   }
   if (action.type === DESTROY_CAMPUS) {
     state = state.filter((campus) => campus.id !== action.campus.id);
+    console.log('state:', state);
   }
   if (action.type === UPDATE_CAMPUS) {
     const otherCampuses = state.filter(

@@ -23,9 +23,9 @@ app.get('/', (req, res, next) =>
 
 app.use('/api', router);
 //404 handler
-app.use((err, req, res, next) => {
-  res.status(404).send('404: Page Not Found');
-});
+// app.use((err, req, res, next) => {
+//   res.status(404).send('404: Page Not Found');
+// });
 //500 handler
 app.use((err, req, res, next) => {
   res.status(500).send({ error: err });

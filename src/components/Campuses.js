@@ -9,20 +9,24 @@ const Campuses = (props) => {
   return (
     <div>
       <h3>Campuses</h3>
-      <ul>
-        {campuses.map((campus, index) => {
-          return (
-            <li key={index}>
-              <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
-              <button onClick={() => destroy(campus)} className="delete">
-                X
-              </button>
-              <br />
-              <img id="campus-img" src={campus.imageUrl} width="150" />
-            </li>
-          );
-        })}
-      </ul>
+      {!!campuses.length ? (
+        <ul>
+          {campuses.map((campus, index) => {
+            return (
+              <li key={index}>
+                <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
+                <button onClick={() => destroy(campus)} className="delete">
+                  X
+                </button>
+                <br />
+                <img id="campus-img" src={campus.imageUrl} width="150" />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <i>There are currently no campuses in the database. </i>
+      )}
     </div>
   );
 };
