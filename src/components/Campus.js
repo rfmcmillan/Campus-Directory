@@ -62,11 +62,10 @@ const mapStateToProps = (state, otherProps) => {
 const mapDispatchToProps = (dispatch) => ({
   unregister: async (student) => {
     try {
-      console.log('student:', student);
       const unregisteredStudent = (
         await axios.put(`api/students/${student.id}`, { campusId: null })
       ).data;
-      console.log('unregisteredStudent:', unregisteredStudent);
+
       dispatch({
         type: UNREGISTER_STUDENT,
         unregisteredStudent,

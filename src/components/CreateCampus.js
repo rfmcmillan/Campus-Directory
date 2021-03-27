@@ -11,6 +11,7 @@ class CreateCampus extends Component {
       city: '',
       state: '',
       zip: '',
+      error: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -37,9 +38,17 @@ class CreateCampus extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <h5>Add Another Campus:</h5>
+        <h5 id="add-campus">Add Another Campus:</h5>
         <form onSubmit={onSave}>
-          <pre>{!!error && JSON.stringify(error, null)}</pre>
+          <h5 className="error">
+            {!!error &&
+              JSON.stringify(
+                error.errors.map((error) => {
+                  return error.message;
+                }),
+                null
+              )}
+          </h5>
           <label>Name:</label>
           <input name="name" value={name} onChange={onChange} />
           <br />

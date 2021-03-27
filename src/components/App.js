@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
+import Alert from './Alert';
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CreateCampus from './CreateCampus';
@@ -9,11 +10,8 @@ import Student from './Student';
 import CreateStudent from './CreateStudent';
 import UpdateStudent from './UpdateStudent';
 import Nav from './Nav';
-import Home from './Home';
-
 import { loadCampuses, loadStudents } from '../store';
-import { Switch, HashRouter, Route } from 'react-router-dom';
-import axios from 'axios';
+import { HashRouter, Route } from 'react-router-dom';
 
 //import any sub-components
 

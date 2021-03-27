@@ -1,10 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Student = ({ student, studentCampus }) => {
-  console.log('studentCampus.id:', studentCampus.id);
   if (!student.id) {
     return '...loading user';
   }
@@ -33,6 +31,7 @@ const Student = ({ student, studentCampus }) => {
 };
 
 const mapStateToProps = (state, otherProps) => {
+  console.log(state);
   const { students, campuses } = state;
   let student;
   student = students.find((student) => {

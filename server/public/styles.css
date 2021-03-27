@@ -16,3 +16,12 @@ form {
 .unregister {
   margin-left: 0.5rem;
 }
+.error {
+  color: red;
+}
+#add-student {
+  margin-bottom: 0px;
+}
+#add-campus {
+  margin-bottom: 0px;
+}

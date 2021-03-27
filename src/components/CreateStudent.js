@@ -9,6 +9,7 @@ class CreateStudent extends Component {
       firstName: '',
       lastName: '',
       email: '',
+      error: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -26,18 +27,26 @@ class CreateStudent extends Component {
       const { firstName, lastName, email } = this.state;
       await this.props.create(firstName, lastName, email);
     } catch (error) {
-      // this.setState({ error: error.response.data.error });
+      this.setState({ error: error.response.data.error });
     }
   }
 
   render() {
-    const { firstName, lastName, email } = this.state;
+    const { firstName, lastName, email, error } = this.state;
     const { onChange, onSave } = this;
     return (
       <div>
-        <h5>Add Another Student:</h5>
+        <h4 id="add-student">Add Another Student:</h4>
         <form onSubmit={onSave}>
-          {/* <pre>{!!error && JSON.stringify(error, null)}</pre> */}
+          <h5 className="error">
+            {!!error &&
+              JSON.stringify(
+                error.errors.map((error) => {
+                  return error.message;
+                }),
+                null
+              )}
+          </h5>
           <label>First Name:</label>
           <input name="firstName" value={firstName} onChange={onChange} />
           <br />
