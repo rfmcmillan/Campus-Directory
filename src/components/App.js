@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 
+import Home from './Home';
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CreateCampus from './CreateCampus';
@@ -31,6 +32,7 @@ class App extends React.Component {
         <HashRouter>
           <div>
             <Route component={Nav} />
+            <Route component={Home} path="/" exact />
             <Route component={CreateCampus} path="/campuses" exact />
             <Route component={Campuses} path="/campuses" exact />
             <Route component={UpdateCampus} path="/campuses/:id" exact />

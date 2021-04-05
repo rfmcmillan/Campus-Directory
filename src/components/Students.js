@@ -9,22 +9,26 @@ const Students = (props) => {
   return (
     <div>
       <h3>Students</h3>
-      <ul>
-        {students.map((student, index) => {
-          return (
-            <li key={index}>
-              <Link to={`/students/${student.id}`}>
-                {student.firstName} {student.lastName}
-              </Link>
-              <button onClick={() => destroy(student)} className="delete">
-                X
-              </button>
-              <br />
-              <img src={student.imageUrl} height="100" />
-            </li>
-          );
-        })}
-      </ul>
+      {!!students.length ? (
+        <ul>
+          {students.map((student, index) => {
+            return (
+              <li key={index}>
+                <Link to={`/students/${student.id}`}>
+                  {student.firstName} {student.lastName}
+                </Link>
+                <button onClick={() => destroy(student)} className="delete">
+                  X
+                </button>
+                <br />
+                <img src={student.imageUrl} height="100" />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <i>There are currently no students in the database.</i>
+      )}
     </div>
   );
 };

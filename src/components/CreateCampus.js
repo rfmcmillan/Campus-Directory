@@ -38,7 +38,7 @@ class CreateCampus extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <h5 id="add-campus">Add Another Campus:</h5>
+        <h4 id="add-campus">Add Another Campus:</h4>
         <form onSubmit={onSave}>
           <h5 className="error">
             {!!error &&
