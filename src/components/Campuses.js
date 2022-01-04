@@ -1,44 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
-import { destroyCampus } from '../store';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Campuses = (props) => {
-  const { campuses, destroy } = props;
+const Campuses = () => {
+  const [campuses, setCampuses] = useState([]);
+
+  useEffect(async () => {
+    const response = await axios.get('/api/campuses');
+    setCampuses(response.data);
+  }, []);
 
   return (
     <div>
-      <h3>Campuses</h3>
-      {!!campuses.length ? (
-        <ul>
-          {campuses.map((campus, index) => {
-            return (
-              <li key={index}>
-                <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
-                <button onClick={() => destroy(campus)} className="delete">
-                  X
-                </button>
-                <br />
-                <img id="campus-img" src={campus.imageUrl} width="150" />
-              </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <i>There are currently no campuses in the database. </i>
-      )}
+      <h1>Campuses</h1>
+      {campuses.map((campus) => {
+        return (
+          <div>
+            <img src={campus.imageUrl} width="200px" />
+            <p>{campus.name}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = (dispatch, { history }) => {
-  return {
-    destroy: (campus) => dispatch(destroyCampus(campus, history)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Campuses);
+export default Campuses;

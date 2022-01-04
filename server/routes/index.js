@@ -6,6 +6,7 @@ const {
 //routes go here - these will be for your api routes
 router.get('/campuses', async (req, res, next) => {
   try {
+    console.log('accessing db');
     const campuses = await Campus.findAll();
     res.send(campuses);
   } catch (error) {

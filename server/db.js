@@ -1,6 +1,7 @@
 const faker = require('faker');
 const { Connection } = require('pg');
 const Sequelize = require('sequelize'); //for things like Sequelize.STRING
+const { DataTypes } = Sequelize;
 const { getMaxListeners } = require('.');
 
 //initialize your db, don't forget to include the possible heroku database URL
@@ -11,7 +12,6 @@ const db = new Sequelize(
   }
 );
 
-const { DataTypes } = Sequelize;
 //define your model
 const Campus = db.define('campus', {
   name: {
@@ -125,7 +125,6 @@ const syncAndSeed = async () => {
     name: 'Bergstrom University',
     imageUrl: 'public/images/ncstate.png',
   });
-
   const jack = await Student.create({
     firstName: 'Jack',
     lastName: 'Smith',
