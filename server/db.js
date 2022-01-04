@@ -12,55 +12,6 @@ const db = new Sequelize(
 );
 
 //define your model
-const Campus = db.define('campus', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-    defaultValue: '/public/images/campus-placeholder.jpg',
-  },
-  streetAddress: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-    defaultValue: faker.address.streetAddress,
-  },
-  city: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-    defaultValue: faker.address.city,
-  },
-  state: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-    defaultValue: faker.address.stateAbbr,
-  },
-  zip: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-    defaultValue: faker.address.zipCode,
-  },
-  description: {
-    type: DataTypes.TEXT,
-    defaultValue: faker.lorem.paragraph,
-  },
-});
 
 const Student = db.define('student', {
   firstName: {
@@ -105,25 +56,11 @@ const Student = db.define('student', {
 //define any class or instance methods
 
 //state your model associations (hasOne etc)
-Student.belongsTo(Campus);
-Campus.hasMany(Student);
 
 //create syncAndSeed
 const syncAndSeed = async () => {
   await db.sync({ force: true });
 
-  const weigand = await Campus.create({
-    name: 'Weigand University',
-    imageUrl: 'public/images/duke.jpg',
-  });
-  const braun = await Campus.create({
-    name: 'Braun University',
-    imageUrl: 'public/images/unc.jpg',
-  });
-  const bergstrom = await Campus.create({
-    name: 'Bergstrom University',
-    imageUrl: 'public/images/ncstate.png',
-  });
   const jack = await Student.create({
     firstName: 'Jack',
     lastName: 'Smith',
@@ -155,9 +92,8 @@ const syncAndSeed = async () => {
 
   return {
     students: { jack, jane, jen },
-    campuses: { weigand, braun, bergstrom },
   };
 };
 
 //export your model
-module.exports = { db, syncAndSeed, models: { Campus, Student } };
+module.exports = { db, syncAndSeed, models: { Student } };

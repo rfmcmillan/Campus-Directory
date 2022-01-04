@@ -2,16 +2,11 @@ import React from 'react';
 import { connect, Provider } from 'react-redux';
 
 import Home from './Home';
-import Campuses from './Campuses';
-import Campus from './Campus';
-import CreateCampus from './CreateCampus';
-import UpdateCampus from './UpdateCampus';
 import Students from './Students';
 import Student from './Student';
 import CreateStudent from './CreateStudent';
 import UpdateStudent from './UpdateStudent';
 import Nav from './Nav';
-import store, { loadCampuses, loadStudents } from '../store';
 import { HashRouter, Route } from 'react-router-dom';
 
 //import any sub-components
@@ -33,10 +28,6 @@ class App extends React.Component {
           <div>
             <Route component={Nav} />
             <Route component={Home} path="/" exact />
-            <Route component={CreateCampus} path="/campuses" exact />
-            <Route component={Campuses} path="/campuses" exact />
-            <Route component={UpdateCampus} path="/campuses/:id" exact />
-            <Route component={Campus} path="/campuses/:id" exact />
             <Route component={CreateStudent} path="/students" exact />
             <Route component={Students} path="/students" exact />
             <Route component={UpdateStudent} path="/students/:id" exact />
